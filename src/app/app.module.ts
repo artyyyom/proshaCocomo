@@ -1,14 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { CocomoBasicComponent } from './cocomoBasic/cocomo-basic.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CocomoBasicComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

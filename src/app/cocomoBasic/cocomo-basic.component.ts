@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { resultPM } from '../shared/resultPM';
+import { floatNum } from '../shared/global';
 
 @Component({
     selector: 'app-cocomo-basic',
@@ -8,21 +10,27 @@ import { Component } from '@angular/core';
 
 
 export class CocomoBasicComponent {
-    row: number = 1;
-    a: number = 0;
-    b: number = 0;
-    c: number = 0;
-    d: number = 0;
-    resPM: number = 0;
-    resTM: number = 0;
+    floatNum: number;
+    row: number;
+    a: number;
+    b: number;
+    c: number;
+    d: number;
+    resPM: number;
+    resTM: number;
+    constructor(){
+        this.floatNum = floatNum;
+        this.a = 0;
+        this.b = 0;
+        this.c = 0;
+        this.d = 0;
+        this.resTM = 0;
+        this.resPM = 0;
+    }
     resultTM(c: number, PM: number, d: number): number {
         return c * Math.pow(PM, d);
     }
-    resultPM(a: number, b: number, size: number): number {
-        return a * Math.pow(size, b);
-    }
     select(row: number) {
-        console.log(row);
         this.row = row;
     }
     result(size: number) {
@@ -32,7 +40,7 @@ export class CocomoBasicComponent {
                 this.b = 1.05;
                 this.c = 2.5;
                 this.d = 0.38;
-                this.resPM = this.resultPM(this.a, this.b, size);
+                this.resPM = resultPM(this.a, this.b, size);
                 this.resTM = this.resultTM(this.c, this.resPM, this.d);
                 break;
             }
@@ -41,7 +49,7 @@ export class CocomoBasicComponent {
                 this.b = 1.12;
                 this.c = 2.5;
                 this.d = 0.35;
-                this.resPM = this.resultPM(this.a, this.b, size);
+                this.resPM = resultPM(this.a, this.b, size);
                 this.resTM = this.resultTM(this.c, this.resPM, this.d);
                 break;
             }
@@ -50,7 +58,7 @@ export class CocomoBasicComponent {
                 this.b = 1.20;
                 this.c = 2.5;
                 this.d = 0.32;
-                this.resPM = this.resultPM(this.a, this.b, size);
+                this.resPM = resultPM(this.a, this.b, size);
                 this.resTM = this.resultTM(this.c, this.resPM, this.d);
                 break;
             }

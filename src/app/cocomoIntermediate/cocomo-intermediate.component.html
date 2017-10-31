@@ -1,0 +1,82 @@
+<h2>2.1.2	Промежуточный уровень (Intermediate COCOMO)</h2>
+
+<pre>
+    На этом уровне базовая модель уточнена за счет ввода дополнительных 15
+    «атрибутов стоимости» (или факторов затрат) Cost Drivers (CDk), которые сгруппированы по четырем категориям:
+    Характеристики продукта (Product Аttributes):
+    Требуемая надежность ПО (Required Software Reliability);
+    Размер БД приложения (Size of Application Database);
+    Сложность продукта (Complexity of the Product);
+    Характеристики аппаратного обеспечения (Hardware Аttributes):
+    Ограничения быстродействия при выполнении программы (Run-Time Performance Constraints);
+    Ограничения памяти (Memory Constraints);
+    Неустойчивость окружения виртуальной машины (Volatility of the Virtual Machine Environment);
+    Требуемое время восстановления (Required Turnabout Time);
+
+    Характеристики персонала (Personnel Аttributes):
+    Аналитические способности (Analyst Capability);
+    Способности к разработке ПО (Software Engineer Capability);
+    Опыт разработки (Applications Experience);
+    Опыт использования	виртуальных	машин	(Virtual Machine Experience);
+    Опыт разработки	на	языках	программирования (Programming Language Experience);
+    Характеристики проекта (Project Аttributes):
+    Использование	инструментария	разработки ПО (Use of	Software Tools);
+    Применение	методов	разработки	ПО	(Application	of	Software Engineering Methods);
+    Требования соблюдения графика разработки (Required Development Schedule).
+    Значения каждого атрибута выбирается из табл. 2.2 в соответствии с его степенью значимости (рейтингом) в конкретном проекте.
+
+</pre>
+
+<h3>Таблица 2.2. Значения атрибутов стоимости в зависимости от их уровня</h3>
+<table #cocomoIntermediate class="cocomo-intermediate">
+    <tr>
+        <td rowspan="2">атрибуты стоимости</td>
+        <td colspan="6">рейтинг</td>
+    </tr>
+    <tr>
+        <td>очень низкий</td>
+        <td>низкий</td>
+        <td>средний</td>
+        <td>высокий</td>
+        <td>очень высокий</td>
+        <td>критический</td>
+    </tr>
+    <tr>
+        <td colspan="7">характеристики продукта</td>
+    </tr>
+    <tr *ngFor="let cell of cells">
+        <td (click)="selectCell($event, cellInput.textContent)" *ngFor="let c of cell.rowCells; let i = index;" [ngClass]="i==cell.selected ? 'selected' : ''" #cellInput>{{ c }}</td>
+    </tr>
+</table>
+
+<h3>Таблица 2.3. Значения коэффициентов промежуточного уровня модели СОСОМО в зависимости от типа проекта</h3>
+<table>
+    <tr >
+        <th>Тип проекта, i</th>
+        <th>аi</th>
+        <th>bi</th>
+    </tr>
+    <tr (click)='select(1)' [ngClass]="row==1 ? 'selected' : ''">
+        <td>1. Распространенный</td>
+        <td>3.2</td>
+        <td>1.05</td>
+    </tr>
+    <tr (click)='select(2)' [ngClass]="row==2 ? 'selected' : ''">
+        <td>2. Полунезависимый</td>
+        <td>3.0</td>
+        <td>1.12</td>
+    </tr>
+    <tr (click)='select(3)' [ngClass]="row==3 ? 'selected' : ''">
+        <td>3. Встроенный</td>
+        <td>2.8</td>
+        <td>1.20</td>
+    </tr>
+</table>
+
+<p>PM = {{ resPM.toFixed(floatNum) }}</p>
+
+<form action="" (ngSubmit) = 'result(sizeInput.value)'>
+    <label for="size">SIZE - Объем программного кода в тысячах строк</label>
+    <input type="text" id="size"  #sizeInput required="required">
+    <input type="submit" value="Вычислить">
+</form>

@@ -1,0 +1,34 @@
+<h2>2.2.	COCOMO II</h2>
+<p>В 1997 методика была усовершенствована и получила название COCOMO
+    II.	Калибровка параметров производилась уже по 161 проекту разработки ПО.
+    Различаются две стадии оценки проекта: предварительная оценка на начальной фазе (Early Design) и детальная оценка после проработки архитектуры (Post Architecture).
+</p>
+<h3>2.2.1	Факторы масштаба (Scale Factors)</h3>
+<p>В методике COCOMO II используются пять факторов масштаба SFj, описание которых приведено в табл.4.</p>
+
+<table>
+    <tr>
+        <td rowspan="2">sfj</td>
+        <td rowspan="2">описание</td>
+        <td colspan="6">уровень значимости фактора</td>
+    </tr>
+    <tr>
+        <td>очень низкий</td>
+        <td>низкий</td>
+        <td>средний</td>
+        <td>высокий</td>
+        <td>очень высокий</td>
+        <td>критический</td>
+    </tr>
+    <tr *ngFor="let cell of cells">
+        <td (click)="selectCell($event)" *ngFor="let c of cell.title" [ngClass]="cell.selected==tdInput.cellIndex ? 'selected' : ''" #tdInput>{{ c }}</td>
+    </tr>
+</table>
+<p>Формула оценки трудоемкости проекта </p>
+<p>PM = </p>
+
+<form action="" (ngSubmit) = 'result(sizeInput.value)'>
+    <label for="size">SIZE - Объем программного кода в тысячах строк</label>
+    <input type="text" id="size"  #sizeInput required="required">
+    <input type="submit" value="Вычислить">
+</form>

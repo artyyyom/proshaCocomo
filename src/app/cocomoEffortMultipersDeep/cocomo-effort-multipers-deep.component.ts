@@ -4,26 +4,26 @@ import { Cocomo } from '../shared/cocomo';
 import { resultPM } from '../shared/resultPM';
 
 @Component({
-  selector: 'app-cocomo-effort-multipers',
-  templateUrl: 'cocomo-effort-multipers.component.html',
-  styleUrls: ['cocomo-effort-multipers.component.css']
+  selector: 'app-cocomo-effort-multipers-deep',
+  templateUrl: 'cocomo-effort-multipers-deep.component.html',
+  styleUrls: ['cocomo-effort-multipers-deep.component.css']
 })
 
-export class CocomoEffortMultipersComponent implements  OnInit {
+export class CocomoEffortMultipersDeepComponent implements  OnInit {
   cells: Cocomo[];
   values: number[];
+  @Output() resultEAFDeep: EventEmitter<number>;
   A: number;
   B: number;
-  @Output() resultEAFPrevent: EventEmitter<number>;
 
   constructor(private cellsService: CocomoService) {
-    this.values = [2.12, 1.59, 0.49, 1, 1, 1.43, 1];
+    this.values = [1.42, 1.22, 1.34, 1.29, 1.19, 1.20, 0.84, 1, 0.73, 1, 0.81, 1, 1, 1, 1.17, 1.22, 1.43];
     this.A = 2.94;
     this.B = 0.91;
-    this.resultEAFPrevent = new EventEmitter<number>();
+    this.resultEAFDeep = new EventEmitter<number>();
   }
   ngOnInit() {
-    this.cells = this.cellsService.getCellsEffortPrevent();
+    this.cells = this.cellsService.getCellsEffortDeep();
     this.result();
   }
   selectCell(event, value) {
@@ -31,6 +31,6 @@ export class CocomoEffortMultipersComponent implements  OnInit {
     this.result();
   }
   result () {
-    this.resultEAFPrevent.emit(this.cellsService.multiplyArrElement(this.values));
+    this.resultEAFDeep.emit(this.cellsService.multiplyArrElement(this.values));
   }
 }

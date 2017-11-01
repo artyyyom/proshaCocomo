@@ -1,12 +1,10 @@
-<h3>2.2.2	Множители трудоемкости (Effort Multipliers)</h3>
-<p>1. Стадия предварительной оценки трудоемкости программного проекта (Early Design). Для этой оценки необходимо оценить для проекта уровень семи множителей трудоемкости EMj:</p>
+<p>2. Стадия детальной оценки после проработки архитектуры (Post Architecture). Для этой оценки необходимо оценить для проекта уровень семнадцати множителей трудоемкости EMj:</p>
 <table>
   <tr>
     <td rowspan="2">mножитель трудоемкости, emi</td>
     <td colspan="7">оценка уровня множителя трудоемкости</td>
   </tr>
   <tr>
-    <td>extra low</td>
     <td>very low</td>
     <td>low</td>
     <td>nominal</td>
@@ -18,3 +16,4 @@
     <td (click)="selectCell($event, cellInput.textContent)" *ngFor="let c of cell.values; let i = index;" [ngClass]="i==cell.selected ? 'selected' : ''" #cellInput>{{ c }}</td>
   </tr>
 </table>
+

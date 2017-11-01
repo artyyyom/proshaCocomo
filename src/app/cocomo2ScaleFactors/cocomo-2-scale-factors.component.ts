@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { resultPM } from '../shared/resultPM';
 
 const cells = [
@@ -35,17 +35,21 @@ const cells = [
     styleUrls: ['cocomo-2-scale-factors.component.css']
 })
 
-export class Cocomo2ScaleFactorsComponent {
+export class Cocomo2ScaleFactorsComponent implements OnInit {
     cells = cells;
     values: Array<number>;
     resPMPrevent: number;
     resPMDeep: number;
+    @Output() resultE: EventEmitter<number>;
     constructor() {
         this.resPMPrevent = 0;
         this.values = [6.20, 5.07, 7.07, 5.48, 7.80];
         this.resPMDeep = 0;
+        this.resultE = new EventEmitter<number>();
     }
-
+    ngOnInit() {
+      this.result();
+    }
     selectCell(event) {
         if (!event.target.cellIndex || event.target.cellIndex === 1) {
             return;
@@ -55,9 +59,16 @@ export class Cocomo2ScaleFactorsComponent {
             this.cells[event.path[1].rowIndex - 2].selected = event.target.cellIndex;
             this.values[event.path[1].rowIndex - 2] = this.cells[event.path[1].rowIndex - 2].values[event.target.cellIndex - 2];
         }
-        console.log(this.values);
+        this.result();
     }
-    result(size) {
-        this.resPMPrevent = 7 * 2.94;
+    sumArr(arr): number {
+      let sum = 0;
+      for ( let i = 0; i < arr.length; i++ ) {
+        sum += arr[i];
+      }
+     return sum;
+    }
+    result() {
+      this.resultE.emit(0.91 + 0.01 * this.sumArr(this.values));
     }
 }

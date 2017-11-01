@@ -1,0 +1,14 @@
+<app-cocomo-2-scale-factors (resultE)="resultE($event)"></app-cocomo-2-scale-factors>
+<app-cocomo-effort-multipers (resultEAFPrevent)="resultEAFPrevent($event)"></app-cocomo-effort-multipers>
+<app-cocomo-effort-multipers-deep (resultEAFDeep)="resultEAFDeep($event)"></app-cocomo-effort-multipers-deep>
+
+
+<p>Формула оценки трудоемкости проекта </p>
+<p>Предварительная оценка PM = {{ resPrevent }}</p>
+<p>Детальная оценка PM = {{ resDeep }}</p>
+
+<form action="" (ngSubmit) = 'result(sizeInput.value)'>
+  <label for="size">SIZE - Объем программного кода в тысячах строк</label>
+  <input type="text" id="size"  #sizeInput required="required">
+  <input type="submit" value="Вычислить">
+</form>

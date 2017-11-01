@@ -24,11 +24,3 @@
         <td (click)="selectCell($event)" *ngFor="let c of cell.title" [ngClass]="cell.selected==tdInput.cellIndex ? 'selected' : ''" #tdInput>{{ c }}</td>
     </tr>
 </table>
-<p>Формула оценки трудоемкости проекта </p>
-<p>PM = </p>
-
-<form action="" (ngSubmit) = 'result(sizeInput.value)'>
-    <label for="size">SIZE - Объем программного кода в тысячах строк</label>
-    <input type="text" id="size"  #sizeInput required="required">
-    <input type="submit" value="Вычислить">
-</form>

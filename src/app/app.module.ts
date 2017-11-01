@@ -9,6 +9,7 @@ import { Cocomo2ScaleFactorsComponent } from './cocomo2ScaleFactors/cocomo-2-sca
 import { CocomoEffortMultipersComponent } from './cocomoEffortMultipers/cocomo-effort-multipers.component';
 import { CocomoEffortMultipersDeepComponent } from './cocomoEffortMultipersDeep/cocomo-effort-multipers-deep.component';
 import { Cocomo2Component } from './cocomo2/cocomo-2.component';
+import { CocomoDurationEvaluationProjectComponent } from './cocomoDurationEvaluationProject/cocomo-duration-evaluation-project.component';
 import { CocomoService } from './cocomo.service';
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CocomoService } from './cocomo.service';
     Cocomo2ScaleFactorsComponent,
     CocomoEffortMultipersComponent,
     CocomoEffortMultipersDeepComponent,
-    Cocomo2Component
+    Cocomo2Component,
+    CocomoDurationEvaluationProjectComponent
   ],
   imports: [
     BrowserModule,

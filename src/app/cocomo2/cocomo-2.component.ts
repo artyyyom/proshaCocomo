@@ -16,6 +16,14 @@ export class Cocomo2Component {
   resPrevent: number;
   resDeep: number;
   size: number;
+  SCEDPrevent: number;
+  SCEDDeep: number;
+  resTMPrevent: number;
+  resTMDeep: number;
+  C: number;
+  D: number;
+  PMnsDeep: number;
+  PMnsPrevent: number;
   constructor() {
     this.APrevent = 2.94;
     this.ADeep = 2.45;
@@ -23,6 +31,26 @@ export class Cocomo2Component {
     this.resDeep = 0;
     this.size = 0;
     this.E = 0;
+    this.SCEDPrevent = 0;
+    this.SCEDDeep = 0;
+    this.resTMPrevent = 0;
+    this.resTMDeep = 0;
+    this.C = 3.67;
+    this.D = 0.28;
+    this.PMnsDeep = 0;
+    this.PMnsPrevent = 0;
+  }
+  resultPMnsPrevent(val) {
+    this.PMnsPrevent = val;
+  }
+  resultPMnsDeep(val) {
+    this.PMnsDeep = val;
+  }
+  resultSCEDPrevent(val) {
+    this.SCEDPrevent = val;
+  }
+  resultSCEDDeep(val) {
+    this.SCEDDeep = val;
   }
   resultEAFDeep(val) {
     this.EAFDeep = val;
@@ -33,16 +61,17 @@ export class Cocomo2Component {
   resultE(val) {
     this.E = val;
   }
-  resultPrevent(size): number {
-    return this.EAFPrevent * resultPM(this.APrevent, this.E, size);
-  }
-  resultDeep(size): number {
-    return this.EAFDeep * resultPM(this.ADeep, this.E, size);
+  resultPMAdv(EAF, A, E, size){
+    return EAF * resultPM(A, this.E, size);
   }
   result(size) {
-    console.log(this.E);
     this.size = size;
-    this.resPrevent = this.resultPrevent(this.size);
-    this.resDeep = this.resultDeep(this.size);
+    this.resPrevent = this.resultPMAdv(this.EAFPrevent, this.APrevent, this.E, size);
+    this.resDeep = this.resultPMAdv(this.EAFDeep, this.ADeep, this.E, size);
+    this.resTMPrevent = this.resultTM(this.SCEDPrevent, this.C, this.PMnsPrevent, this.D,  this.E);
+    this.resTMDeep = this.resultTM(this.SCEDDeep, this.C, this.PMnsDeep, this.D, this.E);
+  }
+  resultTM(SCED, C, PMns, D, E): number {
+    return SCED * C * Math.pow(PMns, D + 0.2 * (E - 0.91));
   }
 }

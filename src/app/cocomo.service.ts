@@ -32,9 +32,9 @@ export class CocomoService {
     return resultArr;
   }
 
-  multiplyArrElement(arr): number {
+  multiplyArrElement(arr, n = arr.length): number {
     let sum = 1;
-    for ( let i = 0; i < arr.length; i++) {
+    for ( let i = 0; i < n; i++) {
       sum *= arr[i];
     }
     return sum;
@@ -43,5 +43,8 @@ export class CocomoService {
     return a * Math.pow(size, b);
   }
 
+  getSCED(arr): number {
+    return arr[arr.length - 1];
+  }
 
 }

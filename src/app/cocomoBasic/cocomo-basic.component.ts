@@ -19,6 +19,7 @@ export class CocomoBasicComponent {
     resPM: number;
     resTM: number;
     constructor(){
+        this.row = 0;
         this.floatNum = floatNum;
         this.a = 0;
         this.b = 0;

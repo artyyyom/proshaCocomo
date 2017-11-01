@@ -41,11 +41,8 @@
         <td>очень высокий</td>
         <td>критический</td>
     </tr>
-    <tr>
-        <td colspan="7">характеристики продукта</td>
-    </tr>
     <tr *ngFor="let cell of cells">
-        <td (click)="selectCell($event, cellInput.textContent)" *ngFor="let c of cell.rowCells; let i = index;" [ngClass]="i==cell.selected ? 'selected' : ''" #cellInput>{{ c }}</td>
+        <td (click)="selectCell($event, cellInput.textContent)" *ngFor="let c of cell.values; let i = index;" [ngClass]="i==cell.selected ? 'selected' : ''" #cellInput>{{ c }}</td>
     </tr>
 </table>
 

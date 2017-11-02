@@ -107,3 +107,23 @@ table a:hover {
 td{
     cursor: pointer;
 }
+
+input[type=submit] {
+background-color: #FBFBFB;
+padding: 3px 7px;
+color: gray;
+border-radius: 1px;
+border: 1px solid #CECECE;
+transition-duration: 0.3s;
+}
+input[type=submit]:hover {
+transition-duration: 0.3s;
+background-color: #CECECE;
+color: white;
+}
+input[type=submit]:active {
+transition-duration: 0.1s;
+background-color: gray;
+border: 1px solid gray;
+border-bottom: white;
+}

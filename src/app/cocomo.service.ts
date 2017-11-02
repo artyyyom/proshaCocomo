@@ -3,6 +3,14 @@ import { cellsEffortDeep } from './shared/global';
 import { cellsIntermediate } from './shared/global';
 
 export class CocomoService {
+  chartData: number[] = [100, 500, 1000, 5000, 10000];
+
+  chartPMBasic: number[];
+  chartIntermediate: number[];
+  chartCocomo2Prevent: number[];
+  chartCocomo2Deep: number[];
+
+
   cellsEffortPrevent = cellsEffortPrevent;
   cellsEffortDeep = cellsEffortDeep;
   cellsIntermediate = cellsIntermediate;
@@ -46,5 +54,36 @@ export class CocomoService {
   getSCED(arr): number {
     return arr[arr.length - 1];
   }
+  getChartArr() {
+    return this.chartData;
+  }
+  setChartPMBasic(valArr) {
+    this.chartPMBasic = valArr;
+    console.log(this.chartPMBasic);
+  }
+  getChartPMBasic() {
+    return this.chartPMBasic;
+  }
+  setChartIntermediate(valArr) {
+    this.chartIntermediate = valArr;  
+  }
+  getChartIntermediate() {
+    return this.chartIntermediate;
+  }
+
+  setChartCocomo2Prevent(valArr) {
+    this.chartCocomo2Prevent = valArr;
+  }
+  getChartCocomo2Prevent() {
+    return this.chartCocomo2Prevent;
+  }
+
+  setChartCocomo2Deep(valArr) {
+    this.chartCocomo2Deep = valArr;
+  }
+  getChartCocomo2Deep() {
+    return this.chartCocomo2Deep;
+  }
+
 
 }

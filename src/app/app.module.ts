@@ -9,8 +9,13 @@ import { Cocomo2ScaleFactorsComponent } from './cocomo2ScaleFactors/cocomo-2-sca
 import { CocomoEffortMultipersComponent } from './cocomoEffortMultipers/cocomo-effort-multipers.component';
 import { CocomoEffortMultipersDeepComponent } from './cocomoEffortMultipersDeep/cocomo-effort-multipers-deep.component';
 import { Cocomo2Component } from './cocomo2/cocomo-2.component';
-import { CocomoDurationEvaluationProjectComponent } from './cocomoDurationEvaluationProject/cocomo-duration-evaluation-project.component';
+import { CocomoChartComponent } from './cocomoChartPM/cocomo-chart-pm.component';
+
+
 import { CocomoService } from './cocomo.service';
+
+import { ChartsModule } from 'ng2-charts';
+import { BarChartDemoComponent } from './cocomoCharts/cocomo-charts.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +26,13 @@ import { CocomoService } from './cocomo.service';
     CocomoEffortMultipersComponent,
     CocomoEffortMultipersDeepComponent,
     Cocomo2Component,
-    CocomoDurationEvaluationProjectComponent
+    BarChartDemoComponent,
+    CocomoChartComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [CocomoService],
   bootstrap: [AppComponent]

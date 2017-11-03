@@ -16,7 +16,7 @@ export class CocomoEffortMultipersComponent implements  OnInit {
   B: number;
   @Output() resultEAFPrevent: EventEmitter<number>;
   @Output()  resultSCEDPrevent: EventEmitter<number>;
-  @Output()  resultPMnsPrevent: EventEmitter<number>;
+  @Output()  resultPMnsMultiplyPrevent: EventEmitter<number>;
 
 
   constructor(private cellsService: CocomoService) {
@@ -25,7 +25,7 @@ export class CocomoEffortMultipersComponent implements  OnInit {
     this.B = 0.91;
     this.resultEAFPrevent = new EventEmitter<number>();
     this.resultSCEDPrevent = new EventEmitter<number>();
-    this.resultPMnsPrevent = new EventEmitter<number>();
+    this.resultPMnsMultiplyPrevent = new EventEmitter<number>();
   }
   ngOnInit() {
     this.cells = this.cellsService.getCellsEffortPrevent();
@@ -38,6 +38,6 @@ export class CocomoEffortMultipersComponent implements  OnInit {
   result () {
     this.resultEAFPrevent.emit(this.cellsService.multiplyArrElement(this.values));
     this.resultSCEDPrevent.emit(this.cellsService.getSCED(this.values));
-    this.resultPMnsPrevent.emit(this.cellsService.multiplyArrElement(this.values, this.values.length - 1));
+    this.resultPMnsMultiplyPrevent.emit(this.cellsService.multiplyArrElement(this.values, this.values.length - 1));
   }
 }

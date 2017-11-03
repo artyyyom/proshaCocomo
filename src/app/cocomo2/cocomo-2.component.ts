@@ -29,8 +29,10 @@ export class Cocomo2Component implements DoCheck{
   resTMDeep: number;
   C: number;
   D: number;
-  PMnsDeep: number;
-  PMnsPrevent: number;
+  resPMnsDeep: number;
+  PMnsMultiplyDeep: number;
+  PMnsMultiplyPrevent: number;
+  resPMnsPrevent:number;
   constructor(private cellsService: CocomoService) {
     this.APrevent = 2.94;
     this.ADeep = 2.45;
@@ -44,11 +46,13 @@ export class Cocomo2Component implements DoCheck{
     this.resTMDeep = 0;
     this.C = 3.67;
     this.D = 0.28;
-    this.PMnsDeep = 0;
-    this.PMnsPrevent = 0;
+    this.PMnsMultiplyDeep = 0;
+    this.PMnsMultiplyPrevent = 0;
     this.floatNum = floatNum;
     this.dataPMPrevent = [];
     this.dataPMDeep = [];
+    this.resPMnsPrevent = 0;
+    this.resPMnsDeep = 0;
   }
   ngDoCheck() {
     this.result(this.size);
@@ -59,11 +63,11 @@ export class Cocomo2Component implements DoCheck{
     this.size = event.target.value;
     this.result(this.size);
   }
-  resultPMnsPrevent(val) {
-    this.PMnsPrevent = val;
+  resultPMnsMultiplyPrevent(val) {
+    this.PMnsMultiplyPrevent = val;
   }
-  resultPMnsDeep(val) {
-    this.PMnsDeep = val;
+  resultPMnsMultiplyDeep(val) {
+    this.PMnsMultiplyDeep = val;
   }
   resultSCEDPrevent(val) {
     this.SCEDPrevent = val;
@@ -101,10 +105,13 @@ export class Cocomo2Component implements DoCheck{
   }
 
   result(size) {
+    console.log(this.PMnsMultiplyPrevent);
     this.resPrevent = this.resultPMAdv(this.EAFPrevent, this.APrevent, this.E, size);
     this.resDeep = this.resultPMAdv(this.EAFDeep, this.ADeep, this.E, size);
-    this.resTMPrevent = this.resultTM(this.SCEDPrevent, this.C, this.PMnsPrevent, this.D,  this.E);
-    this.resTMDeep = this.resultTM(this.SCEDDeep, this.C, this.PMnsDeep, this.D, this.E);
+    this.resPMnsPrevent = this.resultPMAdv(this.PMnsMultiplyPrevent, this.APrevent, this.E, size);
+    this.resPMnsDeep = this.resultPMAdv(this.PMnsMultiplyDeep, this.ADeep, this.E, size);
+    this.resTMPrevent = this.resultTM(this.SCEDPrevent, this.C, this.resPMnsPrevent, this.D,  this.E);
+    this.resTMDeep = this.resultTM(this.SCEDDeep, this.C, this.resPMnsDeep, this.D, this.E);
 
   }
   resultTM(SCED, C, PMns, D, E): number {

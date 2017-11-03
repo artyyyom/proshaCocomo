@@ -15,7 +15,7 @@ export class CocomoEffortMultipersDeepComponent implements  OnInit {
   SCED: number;
   @Output() resultEAFDeep: EventEmitter<number>;
   @Output() resultSCEDDeep: EventEmitter<number>;
-  @Output() resultPMnsDeep: EventEmitter<number>;
+  @Output() resultPMnsMultiplyDeep: EventEmitter<number>;
   A: number;
   B: number;
 
@@ -26,7 +26,7 @@ export class CocomoEffortMultipersDeepComponent implements  OnInit {
     this.SCED = 0;
     this.resultEAFDeep = new EventEmitter<number>();
     this.resultSCEDDeep = new EventEmitter<number>();
-    this.resultPMnsDeep = new EventEmitter<number>();
+    this.resultPMnsMultiplyDeep = new EventEmitter<number>();
   }
   ngOnInit() {
     this.cells = this.cellsService.getCellsEffortDeep();
@@ -40,6 +40,6 @@ export class CocomoEffortMultipersDeepComponent implements  OnInit {
   result (): void {
     this.resultEAFDeep.emit(this.cellsService.multiplyArrElement(this.values));
     this.resultSCEDDeep.emit(this.cellsService.getSCED(this.values));
-    this.resultPMnsDeep.emit(this.cellsService.multiplyArrElement(this.values, this.values.length - 1));
+    this.resultPMnsMultiplyDeep.emit(this.cellsService.multiplyArrElement(this.values, this.values.length - 1));
   }
 }

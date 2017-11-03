@@ -70,6 +70,5 @@ export class Cocomo2ScaleFactorsComponent implements OnInit {
     }
     result() {
       this.resultE.emit(0.91 + 0.01 * this.sumArr(this.values));
-      console.log(0.91 + 0.01 * this.sumArr(this.values));
     }
 }

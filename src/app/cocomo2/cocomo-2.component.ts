@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { resultPM } from '../shared/resultPM';
 import { floatNum } from '../shared/global';
 import { CocomoService } from '../cocomo.service';
+import { CocomoChartComponent } from '../cocomoChartPM/cocomo-chart-pm.component';
 
 @Component({
   selector: 'app-cocomo-2',
   templateUrl: 'cocomo-2.component.html',
-  styleUrls: ['cocomo-2.component.css']
+  styleUrls: ['cocomo-2.component.css'],
+  providers: [CocomoChartComponent]
 })
 
-export class Cocomo2Component implements OnInit{
-  dataPrevent: number[];
-  dataDeep: number[];
+export class Cocomo2Component implements DoCheck{
+  dataPMPrevent: number[];
+  dataPMDeep: number[];
   floatNum: number;
   EAFPrevent: number;
   EAFDeep: number;
@@ -34,7 +36,7 @@ export class Cocomo2Component implements OnInit{
     this.ADeep = 2.45;
     this.resPrevent = 0;
     this.resDeep = 0;
-    this.size = 0;
+    this.size = 2000;
     this.E = 0;
     this.SCEDPrevent = 0;
     this.SCEDDeep = 0;
@@ -45,13 +47,17 @@ export class Cocomo2Component implements OnInit{
     this.PMnsDeep = 0;
     this.PMnsPrevent = 0;
     this.floatNum = floatNum;
-    this.dataPrevent = [];
-    this.dataDeep = [];
+    this.dataPMPrevent = [];
+    this.dataPMDeep = [];
   }
-  ngOnInit() {
-
-    this.setChartCocomo2Prevent(this.EAFPrevent, this.APrevent, this.E);
-    this.setChartCocomo2Deep(this.EAFDeep, this.ADeep, this.E);
+  ngDoCheck() {
+    this.result(this.size);
+    CocomoChartComponent.initCh(this.setChartCocomo2PMPrevent(this.EAFPrevent, this.APrevent, this.E), 2);
+    CocomoChartComponent.initCh(this.setChartCocomo2PMDeep(this.EAFDeep, this.ADeep, this.E), 3);
+  }
+  onKey(event: any) {
+    this.size = event.target.value;
+    this.result(this.size);
   }
   resultPMnsPrevent(val) {
     this.PMnsPrevent = val;
@@ -77,34 +83,29 @@ export class Cocomo2Component implements OnInit{
   resultPMAdv(EAF, A, E, size) {
     return EAF * resultPM(A, this.E, size);
   }
-  setChartCocomo2Prevent(EAFPrevent, APrevent, EPrevent) {
+  setChartCocomo2PMPrevent(EAFPrevent, APrevent, EPrevent) {
     let dataArr = this.cellsService.getChartArr();
 
     for (let i = 0; i < dataArr.length; i++) {
-      this.dataPrevent[i] = parseFloat(this.resultPMAdv(EAFPrevent, APrevent, EPrevent, dataArr[i]).toFixed(this.floatNum));
+      this.dataPMPrevent[i] = parseFloat(this.resultPMAdv(EAFPrevent, APrevent, EPrevent, dataArr[i]).toFixed(this.floatNum));
     }
-    this.cellsService.setChartCocomo2Prevent(this.dataPrevent);
+    return this.dataPMPrevent;
   }
-  setChartCocomo2Deep(EAFDeep, ADeep, EDeep) {
+  setChartCocomo2PMDeep(EAFDeep, ADeep, EDeep) {
     let dataArr = this.cellsService.getChartArr();
 
     for (let i = 0; i < dataArr.length; i++) {
-      this.dataDeep[i] = parseFloat(this.resultPMAdv(EAFDeep, ADeep, EDeep, dataArr[i]).toFixed(this.floatNum));
+      this.dataPMDeep[i] = parseFloat(this.resultPMAdv(EAFDeep, ADeep, EDeep, dataArr[i]).toFixed(this.floatNum));
     }
-    console.log(this.dataDeep);
-    this.cellsService.setChartCocomo2Deep(this.dataDeep);
+    return this.dataPMDeep;
   }
-
 
   result(size) {
-    this.size = size;
     this.resPrevent = this.resultPMAdv(this.EAFPrevent, this.APrevent, this.E, size);
     this.resDeep = this.resultPMAdv(this.EAFDeep, this.ADeep, this.E, size);
     this.resTMPrevent = this.resultTM(this.SCEDPrevent, this.C, this.PMnsPrevent, this.D,  this.E);
     this.resTMDeep = this.resultTM(this.SCEDDeep, this.C, this.PMnsDeep, this.D, this.E);
-    this.setChartCocomo2Prevent(this.EAFPrevent, this.APrevent, this.E);
-    this.setChartCocomo2Deep(this.EAFDeep, this.ADeep, this.E);
-    
+
   }
   resultTM(SCED, C, PMns, D, E): number {
     return SCED * C * Math.pow(PMns, D + 0.2 * (E - 0.91));

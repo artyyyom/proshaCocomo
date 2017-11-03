@@ -9,12 +9,21 @@ import { CocomoService } from '../cocomo.service';
 
 export class CocomoChartComponent implements OnInit {
   flag: boolean;
+  i: number;
+  chartExample: number[];
+
+  public static chartEx = [
+    {data: [], label: 'Базовый уровень '},
+    {data: [], label: 'Промежуточный уровень'},
+    {data: [], label: 'Предварительная оценка'},
+    {data: [], label: 'Детальная оценка'}
+
+  ];
 
   chartPMBasic: number[];
-  chartIntermediate: number[];
-  chartCocomo2Prevent: number[];
-  chartCocomo2Deep: number[];
-  
+  chartPMIntermediate: number[];
+  chartCocomo2PMPrevent: number[];
+  chartCocomo2PMDeep: number[];
 
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
@@ -24,7 +33,7 @@ export class CocomoChartComponent implements OnInit {
   public barChartType: string = 'bar';
   public barChartLegend:  boolean = true;
 
-  public barChartData: any[] = [
+  public barChartData = [
     {data: [], label: 'Базовый уровень '},
     {data: [], label: 'Промежуточный уровень'},
     {data: [], label: 'Предварительная оценка'},
@@ -32,12 +41,20 @@ export class CocomoChartComponent implements OnInit {
 
   ];
 
-  constructor(private cellsService: CocomoService){
+  constructor(private cellsService: CocomoService) {
     this.flag = false;
+    this.i = 0;
+    this.chartExample = [];
+
   }
 
   ngOnInit() {
     this.barChartLabels =  this.cellsService.getChartArr();
+  }
+  public static initCh(val, index) {
+    let clone = JSON.parse(JSON.stringify(this.chartEx));
+    clone[index].data = val;
+    this.chartEx = clone;
   }
 
   // events
@@ -48,23 +65,7 @@ export class CocomoChartComponent implements OnInit {
   public chartHovered(e: any): void {
     console.log(e);
   }
-  public create(){
-
-    this.chartPMBasic =  this.cellsService.getChartPMBasic();
-    this.chartIntermediate = this.cellsService.getChartIntermediate();
-    this.chartCocomo2Prevent = this.cellsService.getChartCocomo2Prevent();
-    this.chartCocomo2Deep = this.cellsService.getChartCocomo2Deep();
-
-    if(this.chartPMBasic){
-      this.flag = true;
-      let clone = JSON.parse(JSON.stringify(this.barChartData));
-      clone[0].data = this.chartPMBasic;  
-      clone[1].data = this.chartIntermediate;
-      clone[2].data = this.chartCocomo2Prevent;
-      clone[3].data = this.chartCocomo2Deep;
-      this.barChartData = clone;
-      console.log(this.chartCocomo2Deep);
-    }
-  } 
-
+  public create() {
+      this.barChartData = CocomoChartComponent.chartEx;
+  }
 }

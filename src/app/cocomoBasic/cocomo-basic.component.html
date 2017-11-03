@@ -39,8 +39,7 @@
 <p> TM = {{ resTM.toFixed(floatNum) }} </p>
 
 <p>Модель этого уровня подходит для ранней быстрой приблизительной оценки затрат, но точность её весьма низка, т.к. не учитываются такие факторы, как квалификация персонала, характеристики оборудования, опыт применения современных методов разработки программного обеспечения и современных инструментальных сред разработки и др.</p>
-<form action="" (ngSubmit) = 'result(sizeInput.value)'>
+<form action="" #myForm="ngForm">
     <label for="size">SIZE - Объем программного кода в тысячах строк</label>
-    <input type="text" id="size"  #sizeInput required="required">
-    <input type="submit" value="Вычислить">
+    <input type="text" (keyup)="onKey($event)" value="{{size}}">
 </form>

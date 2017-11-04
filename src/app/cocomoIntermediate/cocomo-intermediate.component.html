@@ -1,8 +1,7 @@
 <h2>2.1.2	Промежуточный уровень (Intermediate COCOMO)</h2>
 
-<pre>
-    На этом уровне базовая модель уточнена за счет ввода дополнительных 15
-    «атрибутов стоимости» (или факторов затрат) Cost Drivers (CDk), которые сгруппированы по четырем категориям:
+<p>
+    На этом уровне базовая модель уточнена за счет ввода дополнительных 15 «атрибутов стоимости» (или факторов затрат) Cost Drivers (CDk), которые сгруппированы по четырем категориям:
     Характеристики продукта (Product Аttributes):
     Требуемая надежность ПО (Required Software Reliability);
     Размер БД приложения (Size of Application Database);
@@ -25,21 +24,21 @@
     Требования соблюдения графика разработки (Required Development Schedule).
     Значения каждого атрибута выбирается из табл. 2.2 в соответствии с его степенью значимости (рейтингом) в конкретном проекте.
 
-</pre>
 
+</p>
 <h3>Таблица 2.2. Значения атрибутов стоимости в зависимости от их уровня</h3>
 <table #cocomoIntermediate class="cocomo-intermediate">
     <tr>
-        <td rowspan="2">атрибуты стоимости</td>
-        <td colspan="6">рейтинг</td>
+        <th rowspan="2">атрибуты стоимости</th>
+        <th colspan="6">рейтинг</th>
     </tr>
     <tr>
-        <td>очень низкий</td>
-        <td>низкий</td>
+        <th>очень низкий</th>
+        <th>низкий</th>
         <td>средний</td>
-        <td>высокий</td>
-        <td>очень высокий</td>
-        <td>критический</td>
+        <th>высокий</th>
+        <th>очень высокий</th>
+        <th>критический</th>
     </tr>
     <tr *ngFor="let cell of cells">
         <td (click)="selectCell($event, cellInput.textContent)" *ngFor="let c of cell.values; let i = index;" [ngClass]="i==cell.selected ? 'selected' : ''" #cellInput>{{ c }}</td>
@@ -70,8 +69,8 @@
     </tr>
 </table>
 
-<p>PM = {{ resPM.toFixed(floatNum) }}</p>
-<p>TM = {{ resTM.toFixed(floatNum) }}</p>
+<p><b>PM = {{ resPM.toFixed(floatNum) }}</b></p>
+<p><b>TM = {{ resTM.toFixed(floatNum) }}</b></p>
 <form action="" #myForm="ngForm">
     <label for="size">SIZE - Объем программного кода в тысячах строк</label>
     <input type="text" id="size"  (keyup)="onKey($event)" value="{{size}}">

@@ -3,12 +3,12 @@
 <app-cocomo-effort-multipers-deep (resultPMnsMultiplyDeep)="resultPMnsMultiplyDeep($event)" (resultEAFDeep)="resultEAFDeep($event)" (resultSCEDDeep)="resultSCEDDeep($event)"></app-cocomo-effort-multipers-deep>
 
 <h4>Оценка трудоемкости проекта </h4>
-<p>Предварительная оценка PM = {{ resPrevent.toFixed(floatNum) }}</p>
-<p>Детальная оценка PM = {{ resDeep.toFixed(floatNum) }}</p>
+<p><b>Предварительная оценка PM = {{ resPrevent.toFixed(floatNum) }}</b></p>
+<p><b>Детальная оценка PM = {{ resDeep.toFixed(floatNum) }}</b></p>
 
 <h4>Оценка длительности проекта</h4>
-<p>Предварительная оценка TM = {{ resTMPrevent.toFixed(floatNum) }}</p>
-<p>Детальная оценка TM = {{ resTMDeep.toFixed(floatNum) }}</p>
+<p><b>Предварительная оценка TM = {{ resTMPrevent.toFixed(floatNum) }}</b></p>
+<p><b>Детальная оценка TM = {{ resTMDeep.toFixed(floatNum) }}</b></p>
 <form action="" #myForm="ngForm">
   <label for="size">SIZE - Объем программного кода в тысячах строк</label>
   <input type="text" (keyup)="onKey($event)" value="{{size}}">

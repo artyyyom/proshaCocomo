@@ -1,5 +1,11 @@
+
+
 .selected, .selected td{
     background: #cecece!important;
+    transition: opacity .15s ease-in-out;
+    zoom: 1;
+    filter: alpha(opacity=50);
+
 }
 
 table {
@@ -83,9 +89,10 @@ tr:last-child td:last-child{
     border-bottom-right-radius:3px;
 }
 tr:hover td{
-    background: #f2f2f2;
+    background: #e8e8e8;
     background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
     background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
+    transition: 0.2s;
 }
 
 table a:link {
@@ -108,7 +115,19 @@ td{
     cursor: pointer;
 }
 
-input[type=submit] {
+input[type=text] {
+  border: 1px solid #555;
+  padding-left: 5px;
+  height: 20px;
+}
+input[type=text]:focus {
+  border: 2px solid #555;
+  background-color: #0AF;
+  color: white;
+  transition: 0.3s;
+}
+
+button {
 background-color: #FBFBFB;
 padding: 3px 7px;
 color: gray;
@@ -116,14 +135,82 @@ border-radius: 1px;
 border: 1px solid #CECECE;
 transition-duration: 0.3s;
 }
-input[type=submit]:hover {
+button:hover {
 transition-duration: 0.3s;
 background-color: #CECECE;
 color: white;
 }
-input[type=submit]:active {
+button:active {
 transition-duration: 0.1s;
 background-color: gray;
 border: 1px solid gray;
 border-bottom: white;
+}
+
+h2:after,
+h3:after,
+h4:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 1px rgba(0,0,0,0.5),
+    0 1px 1px rgba(255,255,255,0.3);
+}
+
+h2:after { background: #0AF; }
+h3:after { background: #3BF; }
+h4:after { background: #6Cf; }
+
+h1 {
+  font-size: 36px;
+  line-height: 40px;
+  margin: 1em 0 .6em 0;
+  font-weight: normal;
+  color: black;
+  font-family: 'Hammersmith One', sans-serif;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+  position: relative;
+
+}
+
+h2 {
+  margin: 1em 0 .6em 0;
+  padding: 0 0 0 20px;
+  font-weight: normal;
+  color: black;
+  font-family: 'Hammersmith One', sans-serif;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+  position: relative;
+  font-size: 30px;
+  line-height: 40px;
+}
+
+h3 {
+  margin: 1em 0 .6em 0;
+  padding: 0 0 0 20px;
+  font-weight: normal;
+  color: black;
+  font-family: 'Hammersmith One', sans-serif;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+  position: relative;
+  font-size: 24px;
+  line-height: 40px;
+}
+
+h4 {
+  margin: 1em 0 .6em 0;
+  padding: 0 0 0 20px;
+  font-weight: normal;
+  color: black;
+  font-family: 'Hammersmith One', sans-serif;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+  position: relative;
+  font-size: 18px;
+  line-height: 20px;
+
 }

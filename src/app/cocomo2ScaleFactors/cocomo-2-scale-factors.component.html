@@ -13,12 +13,12 @@
         <th colspan="6">уровень значимости фактора</th>
     </tr>
     <tr>
-        <td>очень низкий</td>
-        <td>низкий</td>
-        <td>средний</td>
-        <td>высокий</td>
-        <td>очень высокий</td>
-        <td>критический</td>
+        <th>очень низкий</th>
+        <th>низкий</th>
+        <th>средний</th>
+        <th>высокий</th>
+        <th>очень высокий</th>
+        <th>критический</th>
     </tr>
     <tr *ngFor="let cell of cells">
         <td (click)="selectCell($event)" *ngFor="let c of cell.title" [ngClass]="cell.selected==tdInput.cellIndex ? 'selected' : ''" #tdInput>{{ c }}</td>

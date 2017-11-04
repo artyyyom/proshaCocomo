@@ -23,7 +23,7 @@ export class CocomoChartComponent implements OnInit {
   };
   public barChartLabels: number[];
   public barChartType: string = 'bar';
-  public barChartLegend:  boolean = true;
+  public barChartLegend: boolean = true;
 
   public barChartData = [
     {data: [], label: 'Базовый уровень '},

@@ -10,7 +10,7 @@ import { CocomoEffortMultipersComponent } from './cocomoEffortMultipers/cocomo-e
 import { CocomoEffortMultipersDeepComponent } from './cocomoEffortMultipersDeep/cocomo-effort-multipers-deep.component';
 import { Cocomo2Component } from './cocomo2/cocomo-2.component';
 import { CocomoChartComponent } from './cocomoChartPM/cocomo-chart-pm.component';
-
+import { CocomoChartTMComponent } from './cocomoChartTM/cocomo-chart-tm.component';
 
 import { CocomoService } from './cocomo.service';
 
@@ -27,7 +27,8 @@ import { BarChartDemoComponent } from './cocomoCharts/cocomo-charts.component';
     CocomoEffortMultipersDeepComponent,
     Cocomo2Component,
     BarChartDemoComponent,
-    CocomoChartComponent
+    CocomoChartComponent,
+    CocomoChartTMComponent
   ],
   imports: [
     BrowserModule,

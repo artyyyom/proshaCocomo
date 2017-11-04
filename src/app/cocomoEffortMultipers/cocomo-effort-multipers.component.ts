@@ -40,4 +40,5 @@ export class CocomoEffortMultipersComponent implements  OnInit {
     this.resultSCEDPrevent.emit(this.cellsService.getSCED(this.values));
     this.resultPMnsMultiplyPrevent.emit(this.cellsService.multiplyArrElement(this.values, this.values.length - 1));
   }
+
 }

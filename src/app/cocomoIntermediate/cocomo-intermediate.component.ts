@@ -5,6 +5,7 @@ import { floatNum } from '../shared/global';
 import { CocomoService } from '../cocomo.service';
 import { Cocomo } from '../shared/cocomo';
 import { CocomoChartComponent } from '../cocomoChartPM/cocomo-chart-pm.component';
+import {CocomoChartTMComponent} from "../cocomoChartTM/cocomo-chart-tm.component";
 
 
 @Component({
@@ -17,8 +18,11 @@ import { CocomoChartComponent } from '../cocomoChartPM/cocomo-chart-pm.component
 export class CocomoIntermediateComponent implements OnInit, DoCheck {
     a: number;
     b: number;
+    c: number;
+    d: number;
     size: number;
     dataPM: number[];
+    dataTM: number[];
     floatNum: number;
     resTM: number;
     resPM: number;
@@ -33,17 +37,22 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
         this.resPM = 0;
         this.resTM = 0;
         this.dataPM = [];
+        this.dataTM = [];
+        this.a = 3.2;
+        this.b = 1.05;
+        this.c = 2.5;
+        this.d = 0.38;
     }
     ngOnInit() {
-      this.a = 3.2;
-      this.b = 1.05;
       this.cells = this.cellsService.getCellsIntermediate();
       this.result(this.size);
-      CocomoChartComponent.initCh(this.setChartIntermediate(this.a, this.b), 1);
+      CocomoChartComponent.initCh(this.getChartIntermediate(this.a, this.b), 1);
+      CocomoChartTMComponent.initCh(this.getChartTMIntermediate(), 1);
     }
     ngDoCheck() {
       this.result(this.size);
-      CocomoChartComponent.initCh(this.setChartIntermediate(this.a, this.b), 1);
+      CocomoChartComponent.initCh(this.getChartIntermediate(this.a, this.b), 1);
+      CocomoChartTMComponent.initCh(this.getChartTMIntermediate(), 1);
     }
     onKey(event: any) {
       this.size = event.target.value;
@@ -55,7 +64,7 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
     selectCell(event, value): void {
       this.values = this.cellsService.selectCell(event, value, this.cells, this.values);
     }
-    setChartIntermediate(a, b): number[] {
+    getChartIntermediate(a, b): number[] {
         const chartData = this.cellsService.getChartArr();
 
         for ( let i = 0; i < chartData.length; i++) {
@@ -63,7 +72,13 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
         }
         return this.dataPM;
     }
-
+    getChartTMIntermediate(): number[] {
+        const chartPM = this.dataPM;
+      for ( let i = 0; i < chartPM.length; i++) {
+        this.dataTM[i] = this.resultTM(this.c, chartPM[i], this.d);
+      }
+      return this.dataTM;
+    }
     resultTM(c, resPM, d) {
         return c * Math.pow(resPM, d);
     }
@@ -71,31 +86,31 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
     result(size: number) {
         switch (this.row) {
             case 1: {
-                const a = 3.2;
-                const b = 1.05;
-                const c = 2.5;
-                const d = 0.38;
-                this.resPM = this.resultPmIntermediate(size, a, b);
-                this.resTM = this.resultTM(c, this.resPM, d);
+                this.a = 3.2;
+                this.b = 1.05;
+                this.c = 2.5;
+                this.d = 0.38;
+                this.resPM = this.resultPmIntermediate(size, this.a, this.b);
+                this.resTM = this.resultTM(this.c, this.resPM, this.d);
                 break;
             }
             case 2: {
-                const a = 3.0;
-                const b = 1.12;
-                const c = 2.5;
-                const d = 0.35;
-                this.resPM = this.resultPmIntermediate(size, a, b);
-                this.resTM = this.resultTM(c, this.resPM, d);
+                this.a = 3.0;
+                this.b = 1.12;
+                this.c = 2.5;
+                this.d = 0.35;
+                this.resPM = this.resultPmIntermediate(size, this.a, this.b);
+                this.resTM = this.resultTM(this.c, this.resPM, this.d);
 
               break;
             }
             case 3: {
-                const a = 2.8;
-                const b = 1.20;
-                const c = 2.5;
-                const d = 0.32;
-                this.resPM = this.resultPmIntermediate(size, a, b);
-                this.resTM = this.resultTM(c, this.resPM, d);
+                this.a = 2.8;
+                this.b = 1.20;
+                this.c = 2.5;
+                this.d = 0.32;
+                this.resPM = this.resultPmIntermediate(size, this.a, this.b);
+                this.resTM = this.resultTM(this.c, this.resPM, this.d);
                 break;
             }
         }

@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CocomoService } from '../cocomo.service';
 
 @Component({
-  selector: 'app-cocomo-chart-pm',
-  templateUrl: 'cocomo-chart-pm.component.html',
-  styleUrls: ['cocomo-chart-pm.component.css']
+  selector: 'app-cocomo-chart-tm',
+  templateUrl: 'cocomo-chart-tm.component.html',
+  styleUrls: ['cocomo-chart-tm.component.css']
 })
 
-export class CocomoChartComponent implements OnInit {
+export class CocomoChartTMComponent implements OnInit {
   public static chartEx = [
     {data: [], label: 'Базовый уровень '},
     {data: [], label: 'Промежуточный уровень'},
@@ -15,6 +15,7 @@ export class CocomoChartComponent implements OnInit {
     {data: [], label: 'Детальная оценка'}
 
   ];
+
   chartExample: number[];
 
   public barChartOptions: any = {
@@ -25,7 +26,7 @@ export class CocomoChartComponent implements OnInit {
   public barChartType: string = 'bar';
   public barChartLegend:  boolean = true;
 
-  public barChartData = [
+  public barChartTMData = [
     {data: [], label: 'Базовый уровень '},
     {data: [], label: 'Промежуточный уровень'},
     {data: [], label: 'Предварительная оценка'},
@@ -33,7 +34,9 @@ export class CocomoChartComponent implements OnInit {
 
   ];
   constructor(private cellsService: CocomoService) {
+
     this.chartExample = [];
+
   }
   public static initCh(val, index) {
     let clone = JSON.parse(JSON.stringify(this.chartEx));
@@ -45,7 +48,7 @@ export class CocomoChartComponent implements OnInit {
   }
 
   public create() {
-      this.barChartData = CocomoChartComponent.chartEx;
-      console.log(this.barChartData);
+    this.barChartTMData = CocomoChartTMComponent.chartEx;
+    console.log(this.barChartTMData);
   }
 }

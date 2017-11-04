@@ -3,17 +3,18 @@ import { resultPM } from '../shared/resultPM';
 import { floatNum } from '../shared/global';
 import { CocomoService } from '../cocomo.service';
 import { CocomoChartComponent } from '../cocomoChartPM/cocomo-chart-pm.component';
-
+import { CocomoChartTMComponent } from '../cocomoChartTM/cocomo-chart-tm.component';
 
 @Component({
     selector: 'app-cocomo-basic',
     templateUrl: 'cocomo-basic.component.html',
     styleUrls: ['cocomo-basic.component.css'],
-    providers: [CocomoChartComponent]
+    providers: [CocomoChartComponent, CocomoChartTMComponent]
 })
 
 
 export class CocomoBasicComponent implements OnInit, DoCheck {
+    dataTM: number[];
     size: number;
     data: number[];
     floatNum: number;
@@ -28,23 +29,24 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
         this.size = 2000;
         this.row = 1;
         this.floatNum = floatNum;
-        this.a = 0;
-        this.b = 0;
-        this.c = 0;
-        this.d = 0;
+        this.a = 2.4;
+        this.b = 1.05;
+        this.c = 2.5;
+        this.d = 0.38;
         this.resTM = 0;
         this.resPM = 0;
         this.data = [];
+        this.dataTM = [];
     }
     ngOnInit() {
-      this.a = 2.4;
-      this.b = 1.05;
       this.result(this.size);
-      CocomoChartComponent.initCh(this.getChartBasic(this.a, this.b), 0);
+      CocomoChartComponent.initCh(this.getChartPMBasic(this.a, this.b), 0);
+      CocomoChartTMComponent.initCh(this.getChartTMBasic(), 0);
     }
     ngDoCheck() {
       this.result(this.size);
-      CocomoChartComponent.initCh(this.getChartBasic(this.a, this.b), 0);
+      CocomoChartComponent.initCh(this.getChartPMBasic(this.a, this.b), 0);
+      CocomoChartTMComponent.initCh(this.getChartTMBasic(), 0);
     }
     onKey(event: any) {
       this.size = event.target.value;
@@ -56,12 +58,19 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
     select(row: number) {
         this.row = row;
     }
-    getChartBasic(a, b): number[] {
+    getChartPMBasic(a, b): number[] {
         const chartData = this.cellsService.getChartArr();
         for ( let i = 0; i < chartData.length; i++ ) {
             this.data[i] = parseFloat(resultPM(a, b, chartData[i]).toFixed(this.floatNum));
         }
         return this.data;
+    }
+    getChartTMBasic(): number[] {
+      const dataPM = this.data;
+      for ( let i = 0; i < dataPM.length; i++ ) {
+        this.dataTM[i] =  parseFloat(this.resultTM(this.c, dataPM[i], this.d).toFixed(this.floatNum));
+      }
+      return this.dataTM;
     }
     result(size: number) {
         switch (this.row) {

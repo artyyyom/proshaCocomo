@@ -16,6 +16,9 @@ import {CocomoChartTMComponent} from "../cocomoChartTM/cocomo-chart-tm.component
 })
 
 export class CocomoIntermediateComponent implements OnInit, DoCheck {
+    static saveRow: number;
+    static saveValues: number[];
+    static saveSize: number;
     a: number;
     b: number;
     c: number;
@@ -42,7 +45,11 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
         this.b = 1.05;
         this.c = 2.5;
         this.d = 0.38;
+        CocomoIntermediateComponent.saveRow = this.row;
+        CocomoIntermediateComponent.saveValues = this.values;
+        CocomoIntermediateComponent.saveSize = this.size;
     }
+
     ngOnInit() {
       this.cells = this.cellsService.getCellsIntermediate();
       this.result(this.size);
@@ -57,12 +64,15 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
     onKey(event: any) {
       this.size = event.target.value;
       this.result(this.size);
+      CocomoIntermediateComponent.saveSize = this.size;
     }
     select(row: number) {
         this.row = row;
+        CocomoIntermediateComponent.saveRow = this.row;
     }
     selectCell(event, value): void {
       this.values = this.cellsService.selectCell(event, value, this.cells, this.values);
+      CocomoIntermediateComponent.saveValues = this.values;
     }
     getChartIntermediate(a, b): number[] {
         const chartData = this.cellsService.getChartArr();
@@ -117,5 +127,16 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
     }
     resultPmIntermediate(size, a, b) {
         return this.cellsService.multiplyArrElement(this.values) * resultPM(a, b, size);
+    }
+
+    static getSize() {
+        return CocomoIntermediateComponent.saveSize;
+    }
+
+    static getRow() {
+        return CocomoIntermediateComponent.saveRow;
+    }
+    static getValues() {
+        return CocomoIntermediateComponent.saveValues
     }
 }

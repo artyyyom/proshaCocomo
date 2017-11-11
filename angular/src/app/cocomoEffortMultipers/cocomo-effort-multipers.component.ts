@@ -10,6 +10,7 @@ import { resultPM } from '../shared/resultPM';
 })
 
 export class CocomoEffortMultipersComponent implements  OnInit {
+  static saveValuesPrevent: number[];
   cells: Cocomo[];
   values: number[];
   A: number;
@@ -26,6 +27,7 @@ export class CocomoEffortMultipersComponent implements  OnInit {
     this.resultEAFPrevent = new EventEmitter<number>();
     this.resultSCEDPrevent = new EventEmitter<number>();
     this.resultPMnsMultiplyPrevent = new EventEmitter<number>();
+    CocomoEffortMultipersComponent.saveValuesPrevent = this.values;
   }
   ngOnInit() {
     this.cells = this.cellsService.getCellsEffortPrevent();
@@ -33,12 +35,17 @@ export class CocomoEffortMultipersComponent implements  OnInit {
   }
   selectCell(event, value) {
     this.values = this.cellsService.selectCell(event, value, this.cells, this.values);
+    CocomoEffortMultipersComponent.saveValuesPrevent = this.values;
     this.result();
   }
   result () {
     this.resultEAFPrevent.emit(this.cellsService.multiplyArrElement(this.values));
     this.resultSCEDPrevent.emit(this.cellsService.getSCED(this.values));
     this.resultPMnsMultiplyPrevent.emit(this.cellsService.multiplyArrElement(this.values, this.values.length - 1));
+  }
+
+  static getValues() {
+    return CocomoEffortMultipersComponent.saveValuesPrevent;
   }
 
 }

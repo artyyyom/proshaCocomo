@@ -14,6 +14,8 @@ import { CocomoChartTMComponent } from '../cocomoChartTM/cocomo-chart-tm.compone
 
 
 export class CocomoBasicComponent implements OnInit, DoCheck {
+    static saveRow;
+    static saveSize;
     dataTM: number[];
     size: number;
     data: number[];
@@ -37,6 +39,8 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
         this.resPM = 0;
         this.data = [];
         this.dataTM = [];
+        CocomoBasicComponent.saveRow = this.row;
+        CocomoBasicComponent.saveSize = this.size;
     }
     ngOnInit() {
       this.result(this.size);
@@ -50,13 +54,15 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
     }
     onKey(event: any) {
       this.size = event.target.value;
+      CocomoBasicComponent.saveSize = this.size;
       this.result(this.size);
     }
     resultTM(c: number, PM: number, d: number): number {
         return c * Math.pow(PM, d);
     }
     select(row: number) {
-        this.row = row;
+        this.row = row; 
+        CocomoBasicComponent.saveRow = this.row;
     }
     getChartPMBasic(a, b): number[] {
         const chartData = this.cellsService.getChartArr();
@@ -72,9 +78,15 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
       }
       return this.dataTM;
     }
+    static getRow() {
+        return  CocomoBasicComponent.saveRow;
+    }
+    static getSize() {
+        return CocomoBasicComponent.saveSize;
+    }
     result(size: number) {
         switch (this.row) {
-            case 1: {
+            case 1: {    
                 this.a = 2.4;
                 this.b = 1.05;
                 this.c = 2.5;
@@ -103,4 +115,5 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
             }
         }
     }
+   
 }

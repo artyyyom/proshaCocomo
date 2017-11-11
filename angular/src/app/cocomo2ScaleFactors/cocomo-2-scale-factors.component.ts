@@ -36,6 +36,7 @@ const cells = [
 })
 
 export class Cocomo2ScaleFactorsComponent implements OnInit {
+    static saveValues;
     cells = cells;
     values: Array<number>;
     resPMPrevent: number;
@@ -46,6 +47,7 @@ export class Cocomo2ScaleFactorsComponent implements OnInit {
         this.values = [6.20, 5.07, 7.07, 5.48, 7.80];
         this.resPMDeep = 0;
         this.resultE = new EventEmitter<number>();
+        Cocomo2ScaleFactorsComponent.saveValues = this.values;
     }
     ngOnInit() {
       this.result();
@@ -59,6 +61,7 @@ export class Cocomo2ScaleFactorsComponent implements OnInit {
             this.cells[event.path[1].rowIndex - 2].selected = event.target.cellIndex;
             this.values[event.path[1].rowIndex - 2] = this.cells[event.path[1].rowIndex - 2].values[event.target.cellIndex - 2];
         }
+        Cocomo2ScaleFactorsComponent.saveValues = this.values;
         this.result();
     }
     sumArr(arr): number {
@@ -70,5 +73,9 @@ export class Cocomo2ScaleFactorsComponent implements OnInit {
     }
     result() {
       this.resultE.emit(0.91 + 0.01 * this.sumArr(this.values));
+    }
+
+    static getValues() {
+      return Cocomo2ScaleFactorsComponent.saveValues;
     }
 }

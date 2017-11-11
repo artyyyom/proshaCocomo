@@ -10,7 +10,6 @@ export class CocomoService {
   chartCocomo2Prevent: number[];
   chartCocomo2Deep: number[];
 
-
   cellsEffortPrevent = cellsEffortPrevent;
   cellsEffortDeep = cellsEffortDeep;
   cellsIntermediate = cellsIntermediate;
@@ -39,7 +38,6 @@ export class CocomoService {
     }
     return resultArr;
   }
-
   multiplyArrElement(arr, n = arr.length): number {
     let sum = 1;
     for ( let i = 0; i < n; i++) {
@@ -57,4 +55,6 @@ export class CocomoService {
   getChartArr() {
     return this.chartData;
   }
+
+  
 }

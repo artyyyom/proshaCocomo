@@ -10,6 +10,7 @@ import { resultPM } from '../shared/resultPM';
 })
 
 export class CocomoEffortMultipersDeepComponent implements  OnInit {
+  static saveValuesDeep;
   cells: Cocomo[];
   values: number[];
   SCED: number;
@@ -27,6 +28,7 @@ export class CocomoEffortMultipersDeepComponent implements  OnInit {
     this.resultEAFDeep = new EventEmitter<number>();
     this.resultSCEDDeep = new EventEmitter<number>();
     this.resultPMnsMultiplyDeep = new EventEmitter<number>();
+    CocomoEffortMultipersDeepComponent.saveValuesDeep = this.values;
   }
   ngOnInit() {
     this.cells = this.cellsService.getCellsEffortDeep();
@@ -34,6 +36,7 @@ export class CocomoEffortMultipersDeepComponent implements  OnInit {
   }
   selectCell(event, value) {
     this.values = this.cellsService.selectCell(event, value, this.cells, this.values);
+    CocomoEffortMultipersDeepComponent.saveValuesDeep = this.values;
     this.result();
   }
 
@@ -41,5 +44,9 @@ export class CocomoEffortMultipersDeepComponent implements  OnInit {
     this.resultEAFDeep.emit(this.cellsService.multiplyArrElement(this.values));
     this.resultSCEDDeep.emit(this.cellsService.getSCED(this.values));
     this.resultPMnsMultiplyDeep.emit(this.cellsService.multiplyArrElement(this.values, this.values.length - 1));
+  }
+
+  static getValues() {
+    return CocomoEffortMultipersDeepComponent.saveValuesDeep;
   }
 }

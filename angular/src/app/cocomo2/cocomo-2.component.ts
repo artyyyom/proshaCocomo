@@ -13,6 +13,7 @@ import { CocomoChartTMComponent } from '../cocomoChartTM/cocomo-chart-tm.compone
 })
 
 export class Cocomo2Component implements DoCheck {
+  static saveSize: number;
   dataPMPrevent: number[];
   dataPMDeep: number[];
   floatNum: number;
@@ -62,6 +63,7 @@ export class Cocomo2Component implements DoCheck {
     this.dataTMDeep = [];
     this.resPMnsPreventArr = [];
     this.resPMnsDeepArr = [];
+    Cocomo2Component.saveSize = this.size;
   }
   ngDoCheck() {
     this.result(this.size);
@@ -73,6 +75,7 @@ export class Cocomo2Component implements DoCheck {
   onKey(event: any) {
     this.size = event.target.value;
     this.result(this.size);
+    Cocomo2Component.saveSize = this.size;
   }
   resultPMnsMultiplyPrevent(val) {
     this.PMnsMultiplyPrevent = val;
@@ -130,7 +133,6 @@ export class Cocomo2Component implements DoCheck {
     return this.dataTMDeep;
   }
   result(size) {
-    console.log(this.PMnsMultiplyPrevent);
     this.resPrevent = this.resultPMAdv(this.EAFPrevent, this.APrevent, this.E, size);
     this.resDeep = this.resultPMAdv(this.EAFDeep, this.ADeep, this.E, size);
     this.resPMnsPrevent = this.resultPMAdv(this.PMnsMultiplyPrevent, this.APrevent, this.E, size);
@@ -141,5 +143,8 @@ export class Cocomo2Component implements DoCheck {
   }
   resultTM(SCED, C, PMns, D, E): number {
     return SCED * C * Math.pow(PMns, D + 0.2 * (E - 0.91));
+  }
+  static getSize() {
+    return Cocomo2Component.saveSize;
   }
 }

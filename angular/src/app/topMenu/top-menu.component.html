@@ -1,0 +1,18 @@
+<div class="navbar" *ngIf="!isAuthorized()">
+  <a routerLink="">Главная</a>
+  <a routerLink="/register">Регистрация</a>
+  <a routerLink="/login">Вход</a>
+</div>
+
+<div class="navbar" *ngIf="isAuthorized()">
+  <a href="" (click)="save($event)">Сохранить</a>
+  <div class="dropdown">
+    <button class="dropbtn">Привет, {{ getUserName() }}</button>
+    <div class="dropdown-content">
+      <a href="" (click)="logout($event)">Выйти</a>
+    </div>
+  </div>
+</div>
+
+
+

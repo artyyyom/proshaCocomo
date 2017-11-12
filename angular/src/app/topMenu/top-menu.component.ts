@@ -26,7 +26,6 @@ export class TopMenuComponent {
     e.preventDefault();
     this.authService.logout();
   }
-
   getUserName() {
     let item = JSON.parse(localStorage.getItem('tokens'));
     return item.user.name;

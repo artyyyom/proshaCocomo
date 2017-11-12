@@ -4,6 +4,7 @@ import { floatNum } from '../shared/global';
 import { CocomoService } from '../cocomo.service';
 import { CocomoChartComponent } from '../cocomoChartPM/cocomo-chart-pm.component';
 import { CocomoChartTMComponent } from '../cocomoChartTM/cocomo-chart-tm.component';
+import { CocomoUserService } from '../_services/cocomo-user.service';
 
 @Component({
   selector: 'app-cocomo-2',
@@ -39,12 +40,17 @@ export class Cocomo2Component implements DoCheck {
   dataTMDeep: number[];
   resPMnsDeepArr: number[];
   resPMnsPreventArr: number[];
-  constructor(private cellsService: CocomoService) {
+  constructor(private cocomoUser: CocomoUserService, private cellsService: CocomoService) {
+    if (this.cocomoUser.itemCocomo != null) {
+            let data = JSON.parse(this.cocomoUser.itemCocomo.res[0].cocomo2size);
+            this.size = data[0].size;
+    }else {
+            this.size = 2000;
+    }  
     this.APrevent = 2.94;
     this.ADeep = 2.45;
     this.resPrevent = 0;
     this.resDeep = 0;
-    this.size = 2000;
     this.E = 0;
     this.SCEDPrevent = 0;
     this.SCEDDeep = 0;

@@ -21,3 +21,4 @@ Route::post('register', 'ApiController@register');
 Route::post('login', 'ApiController@userLogin');
 Route::post('logout', 'ApiController@logout');
 Route::post('setCocomoUser', 'ApiController@setCocomoUser');
+Route::get('getCocomoUser', 'ApiController@getCocomoUser');

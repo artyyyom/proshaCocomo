@@ -103,4 +103,13 @@ class ApiController extends Controller
         ], 200);
    } 
   }
+  public function getCocomoUser(Request $request) {
+    $user_id = $request['user_id'];
+    $data = DB::table('cocomo')->where('user_id', $user_id)->get();
+    
+    return response()->json([
+       'message' => 'Data get successfully',
+       'res' => $data
+      ], 200);
+  }
 }

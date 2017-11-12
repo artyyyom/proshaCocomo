@@ -23,6 +23,7 @@ export class CocomoService {
     return this.cellsIntermediate;
   }
   selectCell(event, value, cells, resultArr): number[] {
+    console.log(cells);
     if (!event.target.cellIndex) {
       return;
     }

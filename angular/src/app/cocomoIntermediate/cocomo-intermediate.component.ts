@@ -6,7 +6,7 @@ import { CocomoService } from '../cocomo.service';
 import { Cocomo } from '../shared/cocomo';
 import { CocomoChartComponent } from '../cocomoChartPM/cocomo-chart-pm.component';
 import {CocomoChartTMComponent} from "../cocomoChartTM/cocomo-chart-tm.component";
-
+import { CocomoUserService } from '../_services/cocomo-user.service';
 
 @Component({
     selector: 'app-cocomo-intermediate',
@@ -32,11 +32,20 @@ export class CocomoIntermediateComponent implements OnInit, DoCheck {
     row: number;
     cells: Cocomo[];
     values: Array<number>;
-    constructor(private cellsService: CocomoService, private chartPMIntermediate: CocomoChartComponent) {
-        this.size = 2000;
-        this.floatNum = floatNum;
-        this.row = 1;
+    constructor(private cocomoUser: CocomoUserService,private cellsService: CocomoService, private chartPMIntermediate: CocomoChartComponent) {
+        if (this.cocomoUser.itemCocomo != null) {
+            let data = JSON.parse(this.cocomoUser.itemCocomo.res[0].cocomoIntermediate);
+            this.size = data[0].init;
+            this.row = data[0].row;
+          /// this.values = data[0].values;
+            ///console.log(data[0].values);
+        }else {
+            this.size = 2000;
+            this.row = 1;
+       
+        }
         this.values = [0.74, 1, 0.7, 1, 1, 1, 1, 1.46, 1.29, 1.42, 1.21, 1.14, 1.24, 1.24, 1.23];
+        this.floatNum = floatNum;     
         this.resPM = 0;
         this.resTM = 0;
         this.dataPM = [];

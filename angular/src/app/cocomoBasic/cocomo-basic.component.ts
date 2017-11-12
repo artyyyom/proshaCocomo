@@ -4,6 +4,7 @@ import { floatNum } from '../shared/global';
 import { CocomoService } from '../cocomo.service';
 import { CocomoChartComponent } from '../cocomoChartPM/cocomo-chart-pm.component';
 import { CocomoChartTMComponent } from '../cocomoChartTM/cocomo-chart-tm.component';
+import { CocomoUserService } from '../_services/cocomo-user.service';
 
 @Component({
     selector: 'app-cocomo-basic',
@@ -14,6 +15,7 @@ import { CocomoChartTMComponent } from '../cocomoChartTM/cocomo-chart-tm.compone
 
 
 export class CocomoBasicComponent implements OnInit, DoCheck {
+    getSaveRow: any;
     static saveRow;
     static saveSize;
     dataTM: number[];
@@ -27,9 +29,16 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
     d: number;
     resPM: number;
     resTM: number;
-    constructor(private cellsService: CocomoService, private chartPM: CocomoChartComponent) {
-        this.size = 2000;
-        this.row = 1;
+    constructor(private cocomoUser: CocomoUserService, private cellsService: CocomoService, private chartPM: CocomoChartComponent) {
+        if (this.cocomoUser.itemCocomo != null) {
+            let data = JSON.parse(this.cocomoUser.itemCocomo.res[0].cocomoBasic);
+            this.size = data[0].init;
+            this.row = data[0].row;
+        }else {
+            this.size = 2000;
+            this.row = 1;
+        }
+        
         this.floatNum = floatNum;
         this.a = 2.4;
         this.b = 1.05;
@@ -43,9 +52,18 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
         CocomoBasicComponent.saveSize = this.size;
     }
     ngOnInit() {
+      this.getAllCocomo();  
       this.result(this.size);
       CocomoChartComponent.initCh(this.getChartPMBasic(this.a, this.b), 0);
       CocomoChartTMComponent.initCh(this.getChartTMBasic(), 0);
+      
+    }
+    getAllCocomo() {
+       if(this.cocomoUser.item != null) {
+           this.cocomoUser.getCocomoUser()
+           .subscribe();
+       }
+       
     }
     ngDoCheck() {
       this.result(this.size);

@@ -36,7 +36,7 @@ export class CocomoUserService {
 		let params = new HttpParams();
 		params = params.append('user_id', this.userId.toString());
 		return this.http.get(url, {params: params})
-	      .map(data=>{
+	      .do(data=>{
 	      		console.log(data);
 	      		localStorage.setItem('cocomo', JSON.stringify(data));
 	    		return JSON.stringify(data);

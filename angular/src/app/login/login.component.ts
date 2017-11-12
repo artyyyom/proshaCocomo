@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../user';
 import {HttpErrorResponse} from '@angular/common/http';
+import { CocomoUserService } from '../_services/cocomo-user.service';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   formErrors = [];
   formSubmitting = false;
 
-  constructor(public authService: AuthService, public router: Router, private fb: FormBuilder) {
+  constructor(private cocomoUser: CocomoUserService, public authService: AuthService, public router: Router, private fb: FormBuilder) {
 
   }
   ngOnInit() {
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
       const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '';
       // Redirect the user
       this.router.navigate([redirect]);
+
     }
   }
   get email() {
@@ -44,17 +46,28 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
+ getAllCocomo() {
+       if(this.cocomoUser.item != null) {
+           this.cocomoUser.getCocomoUser()
+           .subscribe(
+               function(response) { console.log(response) }
+             );
+       }
+       
+  }
   login() {
     this.formErrors = [];
     this.formSubmitting = true;
     this.authService.login(this.loginForm.value).subscribe(() => {
       this.formSubmitting = false;
+
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
         const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '';
         // Redirect the user
         this.router.navigate([redirect]);
+        //this.getAllCocomo();
       }
     }, (err: HttpErrorResponse) => {
       this.dataInvalid = true;
@@ -84,5 +97,6 @@ export class LoginComponent implements OnInit {
         }
       }
     });
+
   }
 }

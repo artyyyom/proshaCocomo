@@ -9,6 +9,7 @@ import { Cocomo2ScaleFactorsComponent } from '../cocomo2ScaleFactors/cocomo-2-sc
 import { CocomoEffortMultipersComponent } from '../cocomoEffortMultipers/cocomo-effort-multipers.component';
 import { CocomoEffortMultipersDeepComponent } from '../cocomoEffortMultipersDeep/cocomo-effort-multipers-deep.component';
 import { Cocomo2Component } from '../cocomo2/cocomo-2.component'
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-top-menu',
@@ -17,7 +18,7 @@ import { Cocomo2Component } from '../cocomo2/cocomo-2.component'
 })
 
 export class TopMenuComponent {
-  constructor (private authService: AuthService, private cocomoUserService: CocomoUserService) {}
+  constructor (private router: Router, private authService: AuthService, private cocomoUserService: CocomoUserService) {}
 
   isAuthorized() {
     return  this.authService.isAuthorized();
@@ -25,6 +26,8 @@ export class TopMenuComponent {
   logout(e) {
     e.preventDefault();
     this.authService.logout();
+    this.router.navigate(['']);
+    
   }
   getUserName() {
     let item = JSON.parse(localStorage.getItem('tokens'));

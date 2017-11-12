@@ -34,11 +34,11 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
             let data = JSON.parse(this.cocomoUser.itemCocomo.res[0].cocomoBasic);
             this.size = data[0].init;
             this.row = data[0].row;
-        }else {
+
+        } else {
             this.size = 2000;
-            this.row = 1;
+            this.row = 1; 
         }
-        
         this.floatNum = floatNum;
         this.a = 2.4;
         this.b = 1.05;
@@ -51,8 +51,7 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
         CocomoBasicComponent.saveRow = this.row;
         CocomoBasicComponent.saveSize = this.size;
     }
-    ngOnInit() {
-      this.getAllCocomo();  
+    ngOnInit() {  
       this.result(this.size);
       CocomoChartComponent.initCh(this.getChartPMBasic(this.a, this.b), 0);
       CocomoChartTMComponent.initCh(this.getChartTMBasic(), 0);
@@ -66,6 +65,7 @@ export class CocomoBasicComponent implements OnInit, DoCheck {
        
     }
     ngDoCheck() {
+
       this.result(this.size);
       CocomoChartComponent.initCh(this.getChartPMBasic(this.a, this.b), 0);
       CocomoChartTMComponent.initCh(this.getChartTMBasic(), 0);

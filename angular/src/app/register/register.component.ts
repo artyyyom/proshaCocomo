@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
           this.formErrors.push('please check your backend server.');
         } else {
           console.log(err);
-          const errors = JSON.parse(err.error);
+          const errors = err;
           const items = [];
           for (const key in errors) {
             if (errors.hasOwnProperty(key)) {
